@@ -17,7 +17,7 @@ digitalOceanHelper.getMetadata(metadata,function(){
   request.post({
     url: updatePath,
     headers: {
-      'x-api-key': process.env.SEKANDO_APIKEY,
+      'x-api-key': process.env.SEKANDO_API_KEY,
       'x-api-secret': process.env.SEKANDO_API_SECRET,
       'content-type': 'text/plain'
     },
