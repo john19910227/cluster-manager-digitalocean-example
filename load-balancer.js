@@ -31,7 +31,7 @@ function getAppServers(callback){
           healthCheckQueue.push(function(next){
             var server = JSON.parse(member.metadata)
             //send a request to the server's public IP and added to the list if we get an OK response
-            request.get('http://'+server.publicIp+':'+server.port+'/',function(err,res,body){
+            request.get('http://'+server.publicIp+':'+server.port+'/',{timeout:1000},function(err,res,body){
               if(!err && res.statusCode == 200){
                 servers.push(server)
               }
