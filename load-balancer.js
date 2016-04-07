@@ -13,7 +13,7 @@ var appServers = []
 
 // This gets the cluster members and checks which are healthy
 function getAppServers(callback){
-  var appServersUrl = 'https://api.sekando.com/api/v1/projects/ricky-test-project/clusters/test-app-cluster/members/'
+  var appServersUrl = 'https://api.sekando.com/api/v1/projects/'+process.env.SEKANDO_PROJECT_ID+'/clusters/test-app-cluster/members/'
   request.get({
     url: appServersUrl,
     headers: {

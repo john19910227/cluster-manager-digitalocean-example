@@ -11,7 +11,7 @@ var metadata = {
 // Get information about the droplet such as IP
 digitalOceanHelper.getMetadata(metadata,function(){
   var id = metadata.id
-  var updatePath = 'https://api.sekando.com/api/v1/projects/ricky-test-project/clusters/test-app-cluster/members/'+id+'/set_metadata'
+  var updatePath = 'https://api.sekando.com/api/v1/projects/'+process.env.SEKANDO_PROJECT_ID+'/clusters/test-app-cluster/members/'+id+'/set_metadata'
   console.log('Sending metadata to '+updatePath)
   console.log('Metadata: '+JSON.stringify(metadata))
   request.post({

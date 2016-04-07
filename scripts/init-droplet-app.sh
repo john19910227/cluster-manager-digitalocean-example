@@ -4,6 +4,7 @@
 cat >> /etc/environment <<EOF
 SEKANDO_API_KEY="my-key"
 SEKANDO_API_SECRET="my-secret"
+SEKANDO_PROJECT_ID="my-project-id"
 LC_ALL=en_US.UTF-8
 EOF
 
