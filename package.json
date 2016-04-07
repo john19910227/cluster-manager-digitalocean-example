@@ -1,0 +1,11 @@
+{
+  "name": "cluster-manager-test",
+  "version": "1.0.0",
+  "author": "Ricky Miller <ricky@ricky.me>",
+  "license": "MIT",
+  "dependencies": {
+    "http-proxy": "1.13.2",
+    "queue": "3.1.0",
+    "request": "2.70.0"
+  }
+}
