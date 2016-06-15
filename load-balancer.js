@@ -45,10 +45,6 @@ function getAppServers(callback){
     })
 }
 
-function filterHealthyServers(servers){
-  
-}
-
 function getServerHealth(server){
   const healthCheckUrl = 'http://'+server.publicIp+':'+server.port+'/'
   const fetchOptions = {timeout:1000}
