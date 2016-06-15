@@ -1,41 +1,25 @@
-var http = require('http')
-var request = require('request')
+const http = require('http')
 
-var digitalOceanHelper = require('./lib/digital-ocean-helper')
-
-// We can put anything here, in this case what port we are listening on.
-var metadata = {
-  port: 3000
-}
+const digitalOceanHelper = require('./lib/digital-ocean-helper')
+const cluster = require('./lib/cluster')
 
 // Get information about the droplet such as IP
-digitalOceanHelper.getMetadata(metadata,function(){
-  var id = metadata.id
-  var updatePath = 'https://api.sekando.com/api/v1/projects/'+process.env.SEKANDO_PROJECT_ID+'/clusters/test-app-cluster/members/'+id+'/set_metadata'
-  console.log('Sending metadata to '+updatePath)
-  console.log('Metadata: '+JSON.stringify(metadata))
-  request.post({
-    url: updatePath,
-    headers: {
-      'x-api-key': process.env.SEKANDO_API_KEY,
-      'x-api-secret': process.env.SEKANDO_API_SECRET,
-      'content-type': 'text/plain'
-    },
-    body: JSON.stringify(metadata)
-  },function(e,r,b){
-    if(e){
-      console.log(e)
-    }
-    else{
-      console.log('Metadata saved!')
-    }
+digitalOceanHelper.getMetadata()
+  .then((metadata) => {
+    metadata.port = 3000
+    var id = metadata.id
+    
+    
+    console.log('Sending metadata to Cluster Manager...')
+    cluster.getMemberWithId(id)
+      .then(member => member.setMetadata(JSON.stringify(metadata)))
+      .then(_ => console.log('Metadata sent!'))
+      .catch(_err => console.log(err))
+    // This is a simple HTTP server that just sends the metadata
+    var server = http.createServer(function(req,res){
+      res.setHeader('content-type','text/plain')
+      res.write('Member id: '+metadata.id+'\n'+JSON.stringify(metadata))
+      res.end()
+    }).listen(3000)
   })
-})
-
-// This is a simple HTTP server that just sends the metadata
-var server = http.createServer(function(req,res){
-  res.setHeader('content-type','text/plain')
-  res.write('Member id: '+metadata.id+'\n'+JSON.stringify(metadata))
-  res.end()
-})
-server.listen(3000)
+  .catch((err) => console.log(err))
