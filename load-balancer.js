@@ -1,6 +1,5 @@
 'use strict';
 const http = require('http')
-const Queue = require('queue')
 const httpProxy = require('http-proxy');
 const fetch = require('node-fetch')
 
