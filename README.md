@@ -23,9 +23,10 @@ This project is designed to run on DigitalOcean droplets. Start by logging into 
 3. Select the 512MB machine type.
 4. Choose whatever datacenter you want.
 5. Enable Private Networking and User Data.
-6. Paste the following into the User Data field
+6. Paste the following into the User Data field, with your project and API Key filled in
 ````
-curl https://raw.githubusercontent.com/sekando/cluster-manager-digitalocean-example/master/scripts/init-droplet-app.sh | bash -s \
+#!/bin/sh
+curl https://raw.githubusercontent.com/sekando/cluster-manager-digitalocean-example/39dfb481664ba8032fc1858e61a393f7a92281f6/scripts/init-droplet-app.sh | bash -s \
   <my-project-id> \
   <my-api-key> \
   <my-api-key-secret>
@@ -45,7 +46,8 @@ The load balancer configuration is similar.
 5. Enable Private Networking and User Data.
 6. Paste the following into the User Data field
 ````
-curl https://raw.githubusercontent.com/sekando/cluster-manager-digitalocean-example/master/scripts/init-droplet-load-balancer.sh | bash -s \
+#!/bin/sh
+curl https://raw.githubusercontent.com/sekando/cluster-manager-digitalocean-example/39dfb481664ba8032fc1858e61a393f7a92281f6/scripts/init-droplet-load-balancer.sh | bash -s \
   <my-project-id> \
   <my-api-key> \
   <my-api-key-secret>
