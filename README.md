@@ -55,3 +55,5 @@ curl https://raw.githubusercontent.com/sekando/cluster-manager-digitalocean-exam
 7. Create one droplet
 
 The load balancer should proxy requests to port 3000 to the app servers created previously.
+
+Refresh the page a bunch of times to see that the responses coming from each of app servers.
